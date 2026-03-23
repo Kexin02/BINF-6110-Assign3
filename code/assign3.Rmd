@@ -165,7 +165,7 @@ ggplot(alpha_df, aes(x = group, y = shannon, color = group)) +
   geom_boxplot(width = 0.3, outlier.shape = NA, alpha = 0.5, linewidth = 0.8) +
   geom_jitter(width = 0.08, size = 3, alpha = 1) +
   scale_color_manual(values = c("Omnivore" = "#E2A16F", 
-                                "Vegan" = "#777C6D")) +
+                                "Vegan" = "#84B179")) +
   theme_classic(base_size = 13) +
   labs(
     x = NULL,
@@ -201,8 +201,18 @@ pcoa_df
 ```{r fig.height=5, fig.width=6}
 ggplot(pcoa_df, aes(x = PC1, y = PC2, color = group)) +
   geom_point(size = 3) +
-  theme_minimal() +
-  labs(title = "Beta diversity (PCoA)")
+  scale_color_manual(values = c("Omnivore" = "#E2A16F", 
+                                "Vegan" = "#84B179")) +
+  theme_classic(base_size = 13) +
+  labs(
+    title = "Beta diversity (PCoA)",
+    x = "PC1",
+    y = "PC2",
+    color = "Group"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
 ```
 
 # Differential abundance
@@ -223,6 +233,42 @@ diff_results <- genus_data %>%
   arrange(p_adj)
 
 head(diff_results, 20)
+```
+
+```{r}
+# Calculate mean abundance per group
+mean_abundance <- plot_data %>%
+  group_by(group, taxon) %>%
+  summarise(mean_abundance = mean(abundance), .groups = "drop")
+
+# Convert to wide format
+mean_wide <- mean_abundance %>%
+  pivot_wider(names_from = group, values_from = mean_abundance)
+
+# Calculate log2 fold change (Omnivore vs Vegan)
+mean_wide <- mean_wide %>%
+  mutate(log2FC = log2((Omnivore + 1e-6) / (Vegan + 1e-6)))
+
+# Select top taxa (optional)
+top_diff <- mean_wide %>%
+  arrange(desc(abs(log2FC))) %>%
+  head(10)
+
+# Plot
+ggplot(top_diff, aes(x = reorder(taxon, log2FC), y = log2FC, fill = log2FC > 0)) +
+  geom_bar(stat = "identity", width = 0.7) +
+  coord_flip() +
+  scale_fill_manual(values = c("TRUE" = "#81A6C6", "FALSE" = "#FF5A5A")) +
+  theme_classic(base_size = 13) +
+  labs(
+    title = "Differential abundance (log2 fold change)",
+    x = "Genus",
+    y = "Log2 fold change (Omnivore vs Vegan)"
+  ) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
 ```
 
 # Results
