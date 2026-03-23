@@ -17,7 +17,6 @@ Raw sequencing data were obtained from the NCBI SRA and processed using SRA Tool
 ```{r setup, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(vegan)
-library(RColorBrewer)
 ```
 
 # Sample groups
