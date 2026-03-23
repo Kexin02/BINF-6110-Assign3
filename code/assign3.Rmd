@@ -136,7 +136,6 @@ ggplot(plot_data, aes(x = sample, y = abundance, fill = taxon)) +
   facet_grid(~ group, scales = "free_x", space = "free_x") +
   scale_fill_manual(values = cool_colors) +
   labs(
-    title = "Genus-level taxonomic composition",
     x = NULL,
     y = "Relative abundance",
     fill = "Genus"
@@ -215,7 +214,6 @@ ggplot(pcoa_df, aes(x = PC1, y = PC2, color = group)) +
                                 "Vegan" = "#84B179")) +
   theme_classic(base_size = 13) +
   labs(
-    title = "Beta diversity (PCoA)",
     x = "PC1",
     y = "PC2",
     color = "Group"
@@ -273,7 +271,6 @@ ggplot(top_diff, aes(x = reorder(taxon, log2FC), y = log2FC, fill = log2FC > 0))
   scale_fill_manual(values = c("TRUE" = "#81A6C6", "FALSE" = "#FF5A5A")) +
   theme_classic(base_size = 13) +
   labs(
-    title = "Differential abundance (log2 fold change)",
     x = "Genus",
     y = "Log2 fold change (Omnivore vs Vegan)"
   ) +
