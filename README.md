@@ -16,7 +16,6 @@ Alpha diversity was calculated using the Shannon index with the vegan package (O
 
 ## Results
 
-![Figure 1](figures/figure1.png)
 **Figure 1.** Genus-level taxonomic composition of gut microbiome samples from omnivore and vegan groups. Relative abundance of dominant genera is shown for each sample, illustrating substantial inter-individual variability within and between dietary groups.
 
 Genus-level taxonomic composition revealed substantial inter-individual variability within both dietary groups (Figure 1). Dominant genera such as *Segatella*, *Faecalibacterium*, and *Bacteroides* were observed across samples; however, their relative abundances varied considerably. While certain taxa appeared more prominent in specific samples, no consistent genus-level pattern clearly distinguished omnivore from vegan groups, indicating that microbial composition is highly heterogeneous.
