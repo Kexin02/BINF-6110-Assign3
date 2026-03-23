@@ -2,6 +2,14 @@
 
 ## Introduction
 
+The human gut microbiome plays a fundamental role in host physiology, including metabolism, immune regulation, and nutrient processing (Ramakrishna, 2013). Diet is one of the most influential environmental factors shaping microbial composition, as different dietary patterns provide distinct substrates that can selectively promote specific microbial taxa (Sheflin et al., 2017). For instance, plant-based diets are typically rich in fiber and have been associated with enrichment of short-chain fatty acid–producing bacteria, whereas omnivorous diets may support a broader range of microbial functions due to more diverse nutrient inputs (Fackelmann et al., 2025; Muralidharan et al., 2019).
+
+Despite these associations, the gut microbiome exhibits substantial inter-individual variability, making it difficult to identify consistent microbial signatures linked to dietary patterns (Kerimi et al., 2020; Lampe et al., 2013) . In addition, recent studies suggest that strain-level variation within species may further obscure diet-associated patterns, as different strains can exhibit distinct functional capacities (Bianchetti et al., 2023).
+
+This study builds on previously published metagenomic datasets examining gut microbiomes of individuals with different dietary habits. In particular, diet can select for functionally distinct strains of *Prevotella copri*, highlighting the importance of considering both taxonomic and functional variation in microbiome studies (Filippis et al., 2019).
+
+In this study, shotgun metagenomic sequencing data were analyzed to compare gut microbiome profiles between omnivore and vegan individuals. Taxonomic classification was performed using Kraken2, a k-mer-based method that enables rapid and scalable assignment of sequencing reads to reference genomes (Wood et al., 2019). While Kraken2 offers computational efficiency compared to alignment-based methods, it relies on reference databases and may leave a fraction of reads unclassified. To comprehensively assess microbiome differences, both diversity metrics and taxonomic composition were analyzed, highlighting the strengths and limitations of each approach.
+
 ## Methods
 
 Shotgun metagenomic sequencing data were obtained from publicly available datasets derived from studies investigating the relationship between diet and gut microbiome composition (Filippis et al., 2019). These datasets include samples from individuals with different habitual diets, including omnivores and vegans, allowing for comparative microbiome analysis.
@@ -35,5 +43,7 @@ Beta diversity analysis using PCoA based on Bray-Curtis dissimilarity did not re
 **Figure 4.** Differential abundance of genera between omnivore and vegan groups, shown as log2 fold change. Positive values indicate higher abundance in omnivore samples, while negative values indicate higher abundance in vegan samples. Differences were modest and not consistently observed across samples.
 
 Differential abundance analysis identified several genera with differences in relative abundance between dietary groups (Figure 4). Genera such as *Agathobacter*, *Faecalibacterium*, and *Bifidobacterium* showed relatively higher abundance in omnivore samples, whereas *Akkermansia* and *Blautia* were more abundant in vegan samples. However, these differences were modest in magnitude and not consistently observed across all samples, suggesting that diet-associated effects at the genus level are limited in this dataset.
+
+## Discussion
 
 
