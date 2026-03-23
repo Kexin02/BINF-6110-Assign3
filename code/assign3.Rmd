@@ -6,11 +6,17 @@ date: "2026-03-21"
 
 # Introduction
 
-The human gut microbiome plays a crucial role in metabolism, immune function, and overall health. Diet is one of the major factors influencing microbial composition. In this study, we compare gut microbiomes of vegan and omnivore individuals using shotgun metagenomic data.
+The human gut microbiome plays an important role in metabolism, immune function, and overall health. Diet is a key factor influencing microbial composition, as different dietary patterns provide distinct substrates that shape microbial communities. However, substantial inter-individual variability makes it difficult to identify consistent diet-associated patterns.
+
+In this study, we compare gut microbiomes of vegan and omnivore individuals using shotgun metagenomic sequencing data. Taxonomic composition and diversity metrics were analyzed to assess differences between dietary groups.
 
 # Methods
 
-Raw sequencing data were obtained from the NCBI SRA and processed using SRA Toolkit. Taxonomic classification was performed using Kraken2 with the Standard-8 database. The resulting classification reports were analyzed in R.
+Shotgun metagenomic sequencing data were obtained from the NCBI Sequence Read Archive (SRA). Reads were downloaded using SRA Toolkit and converted to FASTQ format using `fasterq-dump`. Paired-end reads were used for analysis.
+
+Taxonomic classification was performed using Kraken2 with the Standard-8 database. Kraken2 is a k-mer–based method that allows fast classification of reads but depends on reference databases and may leave some reads unclassified.
+
+Kraken2 reports were analyzed in R. Relative abundances were calculated at the genus level, and low-abundance taxa were grouped as “Other”. Alpha diversity was measured using the Shannon index and compared using a Wilcoxon test. Beta diversity was assessed using Bray–Curtis dissimilarity and visualized with PCoA. Differential abundance was estimated using log2 fold change between groups.
 
 # Setup
 
@@ -145,6 +151,9 @@ ggplot(plot_data, aes(x = sample, y = abundance, fill = taxon)) +
     plot.title = element_text(face = "bold", hjust = 0.5),
     legend.position = "bottom"
   )
+
+ggsave("../figures/figure1.png", width = 10, height = 6, dpi = 600)
+
 ```
 
 # Alpha diversity
@@ -173,6 +182,8 @@ ggplot(alpha_df, aes(x = group, y = shannon, color = group)) +
   theme(
     legend.position = "none"
   )
+
+ggsave("../figures/figure2.png", width = 6, height = 5, dpi = 600)
 ```
 
 # Statistics
@@ -212,6 +223,8 @@ ggplot(pcoa_df, aes(x = PC1, y = PC2, color = group)) +
   theme(
     plot.title = element_text(face = "bold", hjust = 0.5)
   )
+
+ggsave("../figures/figure3.png", width = 6, height = 5, dpi = 600)
 ```
 
 # Differential abundance
@@ -268,12 +281,26 @@ ggplot(top_diff, aes(x = reorder(taxon, log2FC), y = log2FC, fill = log2FC > 0))
     legend.position = "none",
     plot.title = element_text(face = "bold", hjust = 0.5)
   )
+
+ggsave("../figures/figure4.png", width = 6, height = 5, dpi = 600)
 ```
 
 # Results
 
-Taxonomic composition analysis revealed variation in genus-level abundance across samples. Alpha diversity indicated differences in microbial diversity between vegan and omnivore groups. Beta diversity analysis suggested distinct clustering patterns. Differential abundance analysis identified genera with significant differences between dietary groups.
+Genus-level taxonomic composition showed substantial variation across individual samples within both dietary groups (Figure 1). Several dominant genera were observed, but no consistent pattern clearly distinguished omnivore and vegan samples.
+
+Alpha diversity analysis indicated a slight trend toward higher Shannon diversity in omnivore samples compared to vegan samples (Figure 2). However, this difference was not statistically significant (Wilcoxon rank-sum test, p = 0.2222).
+
+Beta diversity analysis using PCoA showed no clear separation between dietary groups, with samples from both groups overlapping in ordination space (Figure 3).
+
+Differential abundance analysis identified several genera with differences in relative abundance between groups (Figure 4). However, these differences were modest and not consistently observed across all samples.
 
 # Discussion
 
-These results suggest that dietary patterns influence gut microbiome composition. Differences in microbial diversity and abundance may reflect dietary intake differences. However, limitations include small sample size and incomplete classification of reads.
+The results suggest that dietary patterns have a limited influence on gut microbiome composition in this dataset. Although some trends in diversity and taxonomic abundance were observed, these differences were not statistically significant and were overshadowed by substantial inter-individual variability.
+
+The absence of clear separation between dietary groups is consistent with previous studies showing that microbiome composition is influenced by multiple factors beyond diet, including host-specific and environmental variables. Additionally, the modest differences observed in specific genera suggest that dietary effects may be subtle and context-dependent.
+
+Several limitations should be considered. The small sample size reduces statistical power, and the use of Kraken2 may result in incomplete classification due to reliance on reference databases. Furthermore, diversity metrics such as the Shannon index may obscure finer-scale differences in microbial composition.
+
+Overall, these findings highlight the complexity of diet–microbiome interactions and suggest that larger and more controlled studies are required to detect consistent dietary effects.
