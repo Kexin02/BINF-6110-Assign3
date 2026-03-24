@@ -134,7 +134,8 @@ Gut Microbes, 8(2), 113–129.
 https://doi.org/10.1080/19490976.2016.1270809  
 
 SRA Toolkit Development Team. (n.d.).   
-SRA Toolkit (Version 3.0.9) [Computer software]. Retrieved       https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software. 
+SRA Toolkit (Version 3.0.9) [Computer software]. Retrieved     
+https://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software. 
 
 Tingler, A. M., & Engevik, M. A. (2025).     
 Breaking down barriers: Is intestinal mucus degradation by Akkermansia muciniphila beneficial or harmful? 
